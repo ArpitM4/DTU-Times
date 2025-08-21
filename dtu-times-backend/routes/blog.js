@@ -14,8 +14,10 @@ router.post('/', auth, upload.array('images', 5), async (req, res) => {
     if (!title || !content || !slug) return res.status(400).json({ message: 'All fields required' });
     const exists = await Blog.findOne({ slug });
     if (exists) return res.status(409).json({ message: 'Slug already exists' });
-    let imageUrls = [];
+  console.log('Received blog create request. req.body.images:', req.body.images);
+  let imageUrls = req.body.images || [];
     if (req.files && req.files.length > 0) {
+      imageUrls = [];
       for (const file of req.files) {
         const result = await new Promise((resolve, reject) => {
           const stream = cloudinary.uploader.upload_stream({ folder: 'blogs' }, (err, result) => {
@@ -56,8 +58,8 @@ router.get('/:slug', async (req, res) => {
 // Edit blog (editor/admin only, with image upload)
 router.put('/:id', auth, upload.array('images', 5), async (req, res) => {
   if (!['editor', 'admin'].includes(req.user.role)) return res.status(403).json({ message: 'Forbidden' });
-  const { title, content, isStarred, isFeatured } = req.body;
-  let imageUrls = req.body.images || [];
+  const { title, content, isStarred, isFeatured, images } = req.body;
+  let imageUrls = images || [];
   if (req.files && req.files.length > 0) {
     imageUrls = [];
     for (const file of req.files) {
@@ -70,9 +72,12 @@ router.put('/:id', auth, upload.array('images', 5), async (req, res) => {
       imageUrls.push(result.secure_url);
     }
   }
+  // Always update images field from body (Cloudinary URLs) if present
+  const updateFields = { title, content, isStarred, isFeatured };
+  if (Array.isArray(imageUrls)) updateFields.images = imageUrls;
   const blog = await Blog.findByIdAndUpdate(
     req.params.id,
-    { $set: { title, content, images: imageUrls, isStarred, isFeatured } },
+    { $set: updateFields },
     { new: true }
   );
   if (!blog) return res.status(404).json({ message: 'Blog not found' });

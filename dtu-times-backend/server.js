@@ -21,6 +21,9 @@ app.use('/api/edition', require('./routes/edition'));
 app.use('/api/blog', require('./routes/blog'));
 app.use('/api/contact', require('./routes/contact'));
 
+// PDF Proxy route for inline display
+app.use('/api/pdf-proxy', require('./routes/pdf-proxy'));
+
 // Connect to MongoDB and start server
 const PORT = process.env.PORT || 5000;
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
