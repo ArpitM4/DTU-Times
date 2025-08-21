@@ -1,0 +1,4 @@
+# This folder will contain static public files
+# Will be served directly by Express
+# CSS, JS, favicon, etc.
+# Will be populated during development
