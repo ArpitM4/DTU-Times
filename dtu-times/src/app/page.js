@@ -302,14 +302,26 @@ function TeamSection() {
           </div>
         ) : filtered.map(member => (
           <div key={member.name} className="flex flex-col items-center bg-[var(--bg-secondary)] rounded-2xl p-6 shadow-md w-full max-w-xs border border-[var(--border-color)]" style={{ minHeight: 320 }}>
-            <Image
-              src={member.profilePic}
-              alt={member.name}
-              className="w-28 h-28 object-cover rounded-full mb-4 border-4"
-              style={{ borderColor: 'var(--accent)', background: 'white' }}
-              width={112}
-              height={112}
-            />
+            {member.profilePic && member.profilePic.includes('randomuser.me') ? (
+              <img
+                src={member.profilePic}
+                alt={member.name}
+                className="w-28 h-28 object-cover rounded-full mb-4 border-4"
+                style={{ borderColor: 'var(--accent)', background: 'white' }}
+                width={112}
+                height={112}
+                loading="lazy"
+              />
+            ) : (
+              <Image
+                src={member.profilePic}
+                alt={member.name}
+                className="w-28 h-28 object-cover rounded-full mb-4 border-4"
+                style={{ borderColor: 'var(--accent)', background: 'white' }}
+                width={112}
+                height={112}
+              />
+            )}
             <div className="font-semibold text-lg mb-1 text-center" style={{ color: 'var(--text-primary)' }}>{member.name}</div>
             <div className="text-sm text-center" style={{ color: 'var(--text-secondary)' }}>{member.bio}</div>
           </div>
