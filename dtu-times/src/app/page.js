@@ -390,7 +390,7 @@ function ParallaxImage() {
     {/* Only ONE bounce applied here */}
     <div className="animate-hero-bounce">
       <Image
-        src="/box.png"
+        src="/Box.png"
         alt="DTU Times Box"
         className="max-w-[420px] rounded-xl animate-glow"
         width={420}
