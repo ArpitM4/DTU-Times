@@ -16,14 +16,25 @@ export default function BlogCard({ post }) {
       tabIndex={0}
     >
       <div className="aspect-video w-full overflow-hidden">
-        <Image
-          src={post.imageUrl}
-          alt={post.title}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
-          width={640}
-          height={360}
-          loading="lazy"
-        />
+        {post.imageUrl && post.imageUrl.includes('randomuser.me') ? (
+          <img
+            src={post.imageUrl}
+            alt={post.title}
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+            width={640}
+            height={360}
+            loading="lazy"
+          />
+        ) : (
+          <Image
+            src={post.imageUrl}
+            alt={post.title}
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+            width={640}
+            height={360}
+            loading="lazy"
+          />
+        )}
       </div>
       <div className="p-6 flex flex-col flex-1">
         <span className="inline-block mb-3 px-3 py-1 rounded-full bg-teal-500 text-white text-xs font-semibold tracking-wide shadow">
