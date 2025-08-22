@@ -33,7 +33,7 @@ export default function Home() {
 
 
   
-  // Use theme from ThemeContext for consistent image filter
+  // Use theme from ThemeContext for consistent image filterr
   const { theme } = useTheme();
 
   return (
