@@ -1,6 +1,9 @@
 
+
 'use client'
 import { IconBook, IconDocument, IconGraduation, IconLightbulb } from '../../components/Icon';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function AboutPage() {
   const teamValues = [
@@ -52,15 +55,17 @@ export default function AboutPage() {
                   DTU Times was born from a simple idea: every student has a story worth telling. What started as a small campus newsletter has evolved into a comprehensive digital platform that connects, informs, and inspires the DTU community.
                 </p>
                 <p className="text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                  We're not just reporters; we're students, dreamers, and changemakers who understand the pulse of campus life because we live it every day.
+                  We&apos;re not just reporters; we&apos;re students, dreamers, and changemakers who understand the pulse of campus life because we live it every day.
                 </p>
               </div>
               <div className="relative">
                 <div className="aspect-square rounded-lg border-2 border-dashed flex items-center justify-center text-6xl"
                     style={{ borderColor: 'var(--border-color)', overflow: 'hidden', background: 'var(--bg-secondary)' }}>
-                  <img
+                  <Image
                     src="/About.jpg"
                     alt="About DTU Times"
+                    width={400}
+                    height={400}
                     className="w-full h-full object-cover rounded-lg"
                     style={{ opacity: 0.9}}
                   />
@@ -97,7 +102,7 @@ export default function AboutPage() {
             Our Mission
           </h2>
           <p className="text-lg leading-relaxed max-w-3xl mx-auto opacity-80" style={{ color: 'var(--text-secondary)' }}>
-            To bridge the gap between administration and students, celebrate achievements, share knowledge, and foster a sense of community that extends beyond graduation. We're here to document the DTU experience and ensure every voice is heard.
+            To bridge the gap between administration and students, celebrate achievements, share knowledge, and foster a sense of community that extends beyond graduation. We&apos;re here to document the DTU experience and ensure every voice is heard.
           </p>
         </div>
 
@@ -106,23 +111,26 @@ export default function AboutPage() {
           <p className="text-sm opacity-60 mb-4" style={{ color: 'var(--text-secondary)' }}>
             Have a story to share?
           </p>
-          <a href="/contact" 
-             className="inline-block px-6 py-3 border font-medium transition-all duration-300 hover:translate-x-1 cursor-pointer"
-             style={{ 
-               borderColor: 'var(--accent)',
-               color: 'var(--accent)',
-               backgroundColor: 'transparent'
-             }}
-             onMouseEnter={(e) => {
-               e.target.style.backgroundColor = 'var(--accent)'
-               e.target.style.color = 'white'
-             }}
-             onMouseLeave={(e) => {
-               e.target.style.backgroundColor = 'transparent'
-               e.target.style.color = 'var(--accent)'
-             }}>
-            Get In Touch
-          </a>
+          <Link href="/contact" legacyBehavior>
+            <a
+              className="inline-block px-6 py-3 border font-medium transition-all duration-300 hover:translate-x-1 cursor-pointer"
+              style={{ 
+                borderColor: 'var(--accent)',
+                color: 'var(--accent)',
+                backgroundColor: 'transparent'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'var(--accent)'
+                e.target.style.color = 'white'
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'transparent'
+                e.target.style.color = 'var(--accent)'
+              }}
+            >
+              Get In Touch
+            </a>
+          </Link>
         </div>
       </div>
     </div>
