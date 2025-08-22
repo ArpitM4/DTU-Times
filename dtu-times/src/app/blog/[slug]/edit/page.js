@@ -1,9 +1,9 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { apiFetch } from "@/utils/api";
+import Image from 'next/image';
 
 export default function BlogEditPage() {
   // Utility to generate slug from title (same as in new blog page)
@@ -184,12 +184,14 @@ export default function BlogEditPage() {
               />
               <div className="flex gap-2 mt-2 flex-wrap">
                 {images.map((img, i) => (
-                  <img
+                  <Image
                     key={i}
                     src={img}
                     alt="blog-img"
                     className="w-16 h-16 object-cover rounded-md border"
                     style={{ borderColor: "var(--border-color)" }}
+                    width={64}
+                    height={64}
                   />
                 ))}
               </div>

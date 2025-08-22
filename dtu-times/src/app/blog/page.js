@@ -1,10 +1,10 @@
-'use client'
 
+'use client'
 import { useState, useEffect } from 'react'
 import { useAuth } from '../../context/AuthContext';
 import { apiFetch } from '../../utils/api';
-
 import { useRouter } from 'next/navigation'
+import Image from 'next/image';
 
 export default function BlogPage() {
   const [posts, setPosts] = useState([])
@@ -152,10 +152,13 @@ export default function BlogPage() {
               </div>
               <div className="aspect-video rounded-lg border-2 flex items-center justify-center text-4xl opacity-100 overflow-hidden"
                    style={{ borderColor: 'var(--border-color)' }}>
-                <img
+                <Image
                   src="/SS.png"
                   alt="featured-blog-img"
                   className="w-full h-full object-cover rounded-lg"
+                  width={640}
+                  height={360}
+                  priority
                 />
               </div>
             </div>
@@ -199,11 +202,13 @@ export default function BlogPage() {
               <div className="p-6">
                 {/* Blog Card Image */}
                 {post.images && post.images.length > 0 && (
-                  <img
+                  <Image
                     src={post.images[0]}
                     alt="blog-img"
                     className="w-full h-40 object-cover rounded-md mb-4 border"
                     style={{ borderColor: 'var(--border-color)' }}
+                    width={320}
+                    height={160}
                   />
                 )}
                 <div className="inline-block px-2 py-1 text-xs font-medium rounded mb-3"

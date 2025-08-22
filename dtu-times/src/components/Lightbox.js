@@ -1,6 +1,6 @@
 'use client'
-
 import { useEffect } from 'react'
+import Image from 'next/image';
 
 export default function Lightbox({ image, onClose, onNext, onPrev, currentIndex, totalImages }) {
   // Handle keyboard navigation
@@ -73,11 +73,14 @@ export default function Lightbox({ image, onClose, onNext, onPrev, currentIndex,
         )}
 
         {/* Main Image */}
-        <img
+        <Image
           key={image.id}
           src={image.url}
           alt={image.alt}
           className="max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-fadeIn"
+          width={900}
+          height={600}
+          priority
         />
 
         {/* Image Info */}

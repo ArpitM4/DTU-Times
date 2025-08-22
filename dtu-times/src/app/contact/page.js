@@ -1,6 +1,7 @@
-'use client'
 
+'use client'
 import ContactForm from '@/components/ContactForm'
+import Link from 'next/link';
 
 export default function ContactPage() {
   const contactMethods = [
@@ -82,8 +83,24 @@ export default function ContactPage() {
             <div className="space-y-6">
               {contactMethods.map((method, index) => (
                 <div key={index} className="group">
-                  {method.link ? (
-                    <a href={method.link} 
+                  {method.link && method.link.startsWith('/') ? (
+                    <Link href={method.link}
+                       className="flex items-center gap-4 p-4 -m-4 rounded-lg transition-all duration-300 hover:bg-opacity-50 cursor-pointer"
+                       style={{ '--hover-bg': 'var(--bg-secondary)' }}
+                       onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--bg-secondary)'}
+                       onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>
+                      <span className="text-xl opacity-60">{method.icon}</span>
+                      <div>
+                        <p className="text-sm opacity-60 mb-1" style={{ color: 'var(--text-secondary)' }}>
+                          {method.title}
+                        </p>
+                        <p className="font-medium" style={{ color: 'var(--text-primary)' }}>
+                          {method.value}
+                        </p>
+                      </div>
+                    </Link>
+                  ) : method.link ? (
+                    <a href={method.link}
                        className="flex items-center gap-4 p-4 -m-4 rounded-lg transition-all duration-300 hover:bg-opacity-50 cursor-pointer"
                        style={{ '--hover-bg': 'var(--bg-secondary)' }}
                        onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--bg-secondary)'}
@@ -99,7 +116,7 @@ export default function ContactPage() {
                       </div>
                     </a>
                   ) : (
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 p-4 -m-4 rounded-lg">
                       <span className="text-xl opacity-60">{method.icon}</span>
                       <div>
                         <p className="text-sm opacity-60 mb-1" style={{ color: 'var(--text-secondary)' }}>
@@ -111,6 +128,7 @@ export default function ContactPage() {
                       </div>
                     </div>
                   )}
+               
                 </div>
               ))}
             </div>

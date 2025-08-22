@@ -1,3 +1,4 @@
+
 'use client'
 
 import { useState } from 'react'
@@ -41,7 +42,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
-      {success && <div className="text-green-600">Message sent! We'll get back to you soon.</div>}
+  {success && <div className="text-green-600">Message sent! We&apos;ll get back to you soon.</div>}
       {error && <div className="text-red-500">{error}</div>}
       {/* Name Input */}
       <div className="group">

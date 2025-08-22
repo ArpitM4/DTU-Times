@@ -1,9 +1,9 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { apiFetch } from "@/utils/api";
+import Image from 'next/image';
 
 export default function BlogDetailPage() {
   const router = useRouter();
@@ -58,7 +58,7 @@ export default function BlogDetailPage() {
       <div className="mb-2 text-gray-500">By {blog.authorName} • {new Date(blog.uploadDateTime).toLocaleDateString()}</div>
       <div className="flex gap-2 mb-6 flex-wrap">
         {blog.images?.map((img, i) => (
-          <img key={i} src={img} alt="blog-img" className="w-32 h-32 object-cover rounded" />
+          <Image key={i} src={img} alt="blog-img" className="w-32 h-32 object-cover rounded" width={128} height={128} />
         ))}
       </div>
       <div className="prose dark:prose-invert max-w-none" style={{ color: 'var(--text-primary)' }}>
