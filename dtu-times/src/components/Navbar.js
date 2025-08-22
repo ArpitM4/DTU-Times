@@ -1,11 +1,12 @@
 'use client'
 
-
 import { useState, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { IconMoon, IconSun, IconClose } from './Icon';
 import { useAuth } from '../context/AuthContext';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Navbar() {
 
@@ -66,8 +67,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <div>
-          <a href="/" className="no-underline flex items-center" style={{ color: 'inherit' }}>
-            <img
+          <Link href="/" className="no-underline flex items-center" style={{ color: 'inherit' }}>
+            <Image
               src="/TimesLogo.png"
               alt="DTU Times Logo"
               className="h-10 w-auto"
@@ -77,51 +78,54 @@ export default function Navbar() {
                 filter: theme === 'light' ? 'invert(1) hue-rotate(180deg)' : 'none',
                 transition: 'filter 0.3s'
               }}
+              width={40}
+              height={40}
+              priority
             />
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
   <div className="hidden md:flex items-center gap-8">
           {/* Navigation links */}
-          <a href="/about" className={`nav-link px-4 py-2 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/about' ? 'text-teal-500' : ''}`}
+          <Link href="/about" className={`nav-link px-4 py-2 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/about' ? 'text-teal-500' : ''}`}
              style={{ color: pathname === '/about' ? '#14b8a6' : 'var(--text-secondary)' }}>
             About
             {pathname === '/about' && (
               <span className="absolute left-4 right-4 -bottom-1 h-0.5 bg-teal-500 rounded-full animate-fadeIn" />
             )}
-          </a>
-          <a href="/editions" className={`nav-link px-4 py-2 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/editions' ? 'text-teal-500' : ''}`}
+          </Link>
+          <Link href="/editions" className={`nav-link px-4 py-2 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/editions' ? 'text-teal-500' : ''}`}
              style={{ color: pathname === '/editions' ? '#14b8a6' : 'var(--text-secondary)' }}>
             Editions
             {pathname === '/editions' && (
               <span className="absolute left-4 right-4 -bottom-1 h-0.5 bg-teal-500 rounded-full animate-fadeIn" />
             )}
-          </a>
-          <a href="/blog" className={`nav-link px-4 py-2 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/blog' ? 'text-teal-500' : ''}`}
+          </Link>
+          <Link href="/blog" className={`nav-link px-4 py-2 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/blog' ? 'text-teal-500' : ''}`}
              style={{ color: pathname === '/blog' ? '#14b8a6' : 'var(--text-secondary)' }}>
             Blogs
             {pathname === '/blog' && (
               <span className="absolute left-4 right-4 -bottom-1 h-0.5 bg-teal-500 rounded-full animate-fadeIn" />
             )}
-          </a>
-          <a href="/gallery" className={`nav-link px-4 py-2 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/gallery' ? 'text-teal-500' : ''}`}
+          </Link>
+          <Link href="/gallery" className={`nav-link px-4 py-2 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/gallery' ? 'text-teal-500' : ''}`}
              style={{ color: pathname === '/gallery' ? '#14b8a6' : 'var(--text-secondary)' }}>
             Gallery
             {pathname === '/gallery' && (
               <span className="absolute left-4 right-4 -bottom-1 h-0.5 bg-teal-500 rounded-full animate-fadeIn" />
             )}
-          </a>
-          <a href="/contact" className={`nav-link px-4 py-2 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/contact' ? 'text-teal-500' : ''}`}
+          </Link>
+          <Link href="/contact" className={`nav-link px-4 py-2 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/contact' ? 'text-teal-500' : ''}`}
              style={{ color: pathname === '/contact' ? '#14b8a6' : 'var(--text-secondary)' }}>
             Contact Us
             {pathname === '/contact' && (
               <span className="absolute left-4 right-4 -bottom-1 h-0.5 bg-teal-500 rounded-full animate-fadeIn" />
             )}
-          </a>
+          </Link>
           {/* Profile button at right end */}
           {user && (
-            <a
+            <Link
               href="/profile"
               className="ml-6 px-5 py-2 rounded-lg border transition font-semibold"
               style={{
@@ -140,7 +144,7 @@ export default function Navbar() {
               }}
             >
               Profile
-            </a>
+            </Link>
           )}
           {/* Theme Toggle */}
           <button onClick={toggleTheme} 
@@ -183,22 +187,22 @@ export default function Navbar() {
           </button>
         </div>
         <div className="flex flex-col p-8 gap-4">
-          <a href="/gallery" className={`mobile-nav-link p-4 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/gallery' ? 'text-teal-500' : ''}`}
+          <Link href="/gallery" className={`mobile-nav-link p-4 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/gallery' ? 'text-teal-500' : ''}`}
              style={{ color: pathname === '/gallery' ? '#14b8a6' : 'var(--text-secondary)' }}
              onClick={closeMenu}>
             Gallery
             {pathname === '/gallery' && (
               <span className="absolute left-4 right-4 -bottom-1 h-0.5 bg-teal-500 rounded-full animate-fadeIn" />
             )}
-          </a>
-          <a href="/about" className={`mobile-nav-link p-4 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/about' ? 'text-teal-500' : ''}`}
+          </Link>
+          <Link href="/about" className={`mobile-nav-link p-4 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/about' ? 'text-teal-500' : ''}`}
              style={{ color: pathname === '/about' ? '#14b8a6' : 'var(--text-secondary)' }}
              onClick={closeMenu}>
             About
             {pathname === '/about' && (
               <span className="absolute left-4 right-4 -bottom-1 h-0.5 bg-teal-500 rounded-full animate-fadeIn" />
             )}
-          </a>
+          </Link>
           <a href="/editions" className={`mobile-nav-link p-4 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/editions' ? 'text-teal-500' : ''}`}
              style={{ color: pathname === '/editions' ? '#14b8a6' : 'var(--text-secondary)' }}
              onClick={closeMenu}>

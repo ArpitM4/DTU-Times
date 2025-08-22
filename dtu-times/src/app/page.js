@@ -1,8 +1,9 @@
-'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { apiFetch } from '../utils/api';
+import Link from 'next/link';
+import Image from 'next/image';
 
 /* -----------------------------
    Home Page
@@ -45,17 +46,20 @@ export default function Home() {
         style={{ backgroundColor: 'var(--bg-primary)' }}
       >
         {/* Witch image at bottom left, only on md+ screens */}
-        <img
+        <Image
           src="/witch.png"
           alt="Witch"
           className="hidden md:block absolute left-0 bottom-0 mb-4 ml-4 z-20 animate-witch-rotate"
           style={{ height: '250px', width: 'auto' }}
+          width={250}
+          height={250}
+          priority
         />
         <div className="max-w-7xl w-full flex items-center gap-8 md:gap-16 lg:flex-row flex-col py-8 md:py-0 relative">
           {/* Left Text (now on left for all breakpoints) */}
           <div className="flex-1 flex flex-col justify-center text-center lg:text-left order-1">
             <div className="flex flex-wrap justify-center lg:justify-start items-center gap-2 mb-2">
-              <img
+              <Image
                 src="/DTU.png"
                 alt="DTU"
                 className="h-16 md:h-28 lg:h-32 w-auto transition-all"
@@ -64,8 +68,11 @@ export default function Home() {
                   filter: theme === 'light' ? 'invert(1) brightness(0)' : 'none',
                   transition: 'filter 0.3s'
                 }}
+                width={128}
+                height={128}
+                priority
               />
-              <img
+              <Image
                 src="/Times.png"
                 alt="Times"
                 className="h-12 md:h-20 lg:h-24 w-auto transition-all"
@@ -74,6 +81,9 @@ export default function Home() {
                   filter: theme === 'light' ? 'invert(1) brightness(0)' : 'none',
                   transition: 'filter 0.3s'
                 }}
+                width={96}
+                height={96}
+                priority
               />
             </div>
             <div className="w-1/2 h-px mb-10"
@@ -132,16 +142,19 @@ export default function Home() {
                 No editions found.
               </div>
             ) : latestEditions.map((edition) => (
-              <a key={edition._id} href={`/editions/view/${edition.editionNumber}`} className="block">
+              <Link key={edition._id} href={`/editions/view/${edition.editionNumber}`} className="block">
                 <div className="edition-placeholder border-2 border-dashed rounded-2xl aspect-[1275/1650] max-h-[650px] w-[85%] mx-auto flex items-center justify-center text-lg font-medium transition-all duration-300 hover:-translate-y-1 relative overflow-hidden cursor-pointer bg-white"
                   style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-color)', color: 'var(--text-secondary)' }}>
                   <div className="absolute inset-0 w-full h-full">
                     {edition.coverPicUrl ? (
-                      <img
+                      <Image
                         src={edition.coverPicUrl}
                         alt={`Edition ${edition.editionNumber} Cover`}
                         className="w-full h-full object-contain rounded-2xl"
                         style={{ zIndex: 0, objectFit: 'contain', aspectRatio: '1275/1650', background: 'white' }}
+                        width={255}
+                        height={330}
+                        priority={false}
                       />
                     ) : (
                       <div className="flex flex-col items-center justify-center h-full w-full z-10 relative">
@@ -157,18 +170,18 @@ export default function Home() {
                     )}
                   </div>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
 
           {/* Explore + Scroll Button */}
           <div className="text-center flex flex-col items-center gap-2">
-            <a
+            <Link
               href="/editions"
               className="font-semibold text-base md:text-lg text-teal-600 dark:text-teal-400 transition-colors duration-200 hover:text-glow flex items-center gap-1"
             >
               Explore Editions
-            </a>
+            </Link>
 
             <button
               className="scroll-arrow mt-2 md:mt-3 w-8 h-8 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 z-10 cursor-pointer"
@@ -287,11 +300,13 @@ function TeamSection() {
           </div>
         ) : filtered.map(member => (
           <div key={member.name} className="flex flex-col items-center bg-[var(--bg-secondary)] rounded-2xl p-6 shadow-md w-full max-w-xs border border-[var(--border-color)]" style={{ minHeight: 320 }}>
-            <img
+            <Image
               src={member.profilePic}
               alt={member.name}
               className="w-28 h-28 object-cover rounded-full mb-4 border-4"
               style={{ borderColor: 'var(--accent)', background: 'white' }}
+              width={112}
+              height={112}
             />
             <div className="font-semibold text-lg mb-1 text-center" style={{ color: 'var(--text-primary)' }}>{member.name}</div>
             <div className="text-sm text-center" style={{ color: 'var(--text-secondary)' }}>{member.bio}</div>
@@ -372,10 +387,13 @@ function ParallaxImage() {
   >
     {/* Only ONE bounce applied here */}
     <div className="animate-hero-bounce">
-      <img
+      <Image
         src="/box.png"
         alt="DTU Times Box"
         className="max-w-[420px] rounded-xl animate-glow"
+        width={420}
+        height={420}
+        priority
       />
     </div>
   </div>
