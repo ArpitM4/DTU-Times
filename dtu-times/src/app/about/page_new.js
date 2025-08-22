@@ -1,3 +1,5 @@
+
+import Link from 'next/link';
 'use client'
 
 export default function AboutPage() {
@@ -50,7 +52,7 @@ export default function AboutPage() {
                   DTU Times was born from a simple idea: every student has a story worth telling. What started as a small campus newsletter has evolved into a comprehensive digital platform that connects, informs, and inspires the DTU community.
                 </p>
                 <p className="text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                  We're not just reporters; we're students, dreamers, and changemakers who understand the pulse of campus life because we live it every day.
+                  We&apos;re not just reporters; we&apos;re students, dreamers, and changemakers who understand the pulse of campus life because we live it every day.
                 </p>
               </div>
               <div className="relative">
@@ -99,25 +101,27 @@ export default function AboutPage() {
           <p className="text-sm opacity-60 mb-4" style={{ color: 'var(--text-secondary)' }}>
             Have a story to share?
           </p>
-          <a href="/contact" 
-             className="inline-block px-6 py-3 border font-medium transition-all duration-300 hover:translate-x-1 cursor-pointer"
-             style={{ 
-               borderColor: 'var(--accent)',
-               color: 'var(--accent)',
-               backgroundColor: 'transparent'
-             }}
-             onMouseEnter={(e) => {
-               e.target.style.backgroundColor = 'var(--accent)'
-               e.target.style.color = 'white'
-             }}
-             onMouseLeave={(e) => {
-               e.target.style.backgroundColor = 'transparent'
-               e.target.style.color = 'var(--accent)'
-             }}>
+          <Link href="/contact" 
+            className="inline-block px-6 py-3 border font-medium transition-all duration-300 hover:translate-x-1 cursor-pointer"
+            style={{ 
+              borderColor: 'var(--accent)',
+              color: 'var(--accent)',
+              backgroundColor: 'transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = 'var(--accent)'
+              e.target.style.color = 'white'
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = 'transparent'
+              e.target.style.color = 'var(--accent)'
+            }}>
             Get In Touch
-          </a>
+          </Link>
         </div>
       </div>
     </div>
   )
 }
+
+import Link from 'next/link';

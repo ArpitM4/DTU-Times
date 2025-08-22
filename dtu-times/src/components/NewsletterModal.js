@@ -188,7 +188,7 @@ export default function NewsletterModal({ isOpen, onClose }) {
               Thank you for subscribing!
             </h3>
             <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
-              You'll receive our latest updates and exclusive content directly in your inbox.
+              You&apos;ll receive our latest updates and exclusive content directly in your inbox.
             </p>
             <button
               onClick={onClose}
