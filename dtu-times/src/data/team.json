@@ -1,0 +1,151 @@
+[
+  {
+    "name": "Aarav Sharma",
+    "bio": "Coordinator. Loves organizing and leading creative teams.",
+    "role": "Coordinators",
+    "profilePic": "https://randomuser.me/api/portraits/men/32.jpg"
+  },
+  {
+    "name": "Neha Kapoor",
+    "bio": "Coordinator. Enjoys planning events and managing student initiatives.",
+    "role": "Coordinators",
+    "profilePic": "https://randomuser.me/api/portraits/women/36.jpg"
+  },
+  {
+    "name": "Aditya Mehra",
+    "bio": "Coordinator. Skilled at team management and community building.",
+    "role": "Coordinators",
+    "profilePic": "https://randomuser.me/api/portraits/men/48.jpg"
+  },
+  {
+    "name": "Priya Bansal",
+    "bio": "Coordinator. Passionate about bridging communication between teams.",
+    "role": "Coordinators",
+    "profilePic": "https://randomuser.me/api/portraits/women/50.jpg"
+  },
+
+  {
+    "name": "Isha Verma",
+    "bio": "Columnist. Writes about campus life and student stories.",
+    "role": "Columnists",
+    "profilePic": "https://randomuser.me/api/portraits/women/44.jpg"
+  },
+  {
+    "name": "Manav Khanna",
+    "bio": "Columnist. Covers tech and innovation across the university.",
+    "role": "Columnists",
+    "profilePic": "https://randomuser.me/api/portraits/men/77.jpg"
+  },
+  {
+    "name": "Ritika Sood",
+    "bio": "Columnist. Focused on culture, arts, and lifestyle topics.",
+    "role": "Columnists",
+    "profilePic": "https://randomuser.me/api/portraits/women/61.jpg"
+  },
+  {
+    "name": "Arjun Nair",
+    "bio": "Columnist. Writes on student entrepreneurship and career growth.",
+    "role": "Columnists",
+    "profilePic": "https://randomuser.me/api/portraits/men/28.jpg"
+  },
+
+  {
+    "name": "Rohan Patel",
+    "bio": "Designer. Passionate about visual storytelling and layout.",
+    "role": "Designers",
+    "profilePic": "https://randomuser.me/api/portraits/men/65.jpg"
+  },
+  {
+    "name": "Tanya Malhotra",
+    "bio": "Designer. Loves crafting creative posters and magazine covers.",
+    "role": "Designers",
+    "profilePic": "https://randomuser.me/api/portraits/women/22.jpg"
+  },
+  {
+    "name": "Siddharth Rao",
+    "bio": "Designer. Skilled in UI/UX and editorial layouts.",
+    "role": "Designers",
+    "profilePic": "https://randomuser.me/api/portraits/men/81.jpg"
+  },
+  {
+    "name": "Ananya Gupta",
+    "bio": "Designer. Experiments with typography and modern design trends.",
+    "role": "Designers",
+    "profilePic": "https://randomuser.me/api/portraits/women/14.jpg"
+  },
+
+  {
+    "name": "Meera Singh",
+    "bio": "Photographer. Captures the vibrant moments of campus.",
+    "role": "Photographers",
+    "profilePic": "https://randomuser.me/api/portraits/women/68.jpg"
+  },
+  {
+    "name": "Rahul Tiwari",
+    "bio": "Photographer. Loves candid and event photography.",
+    "role": "Photographers",
+    "profilePic": "https://randomuser.me/api/portraits/men/73.jpg"
+  },
+  {
+    "name": "Shruti Das",
+    "bio": "Photographer. Passionate about nature and portrait shots.",
+    "role": "Photographers",
+    "profilePic": "https://randomuser.me/api/portraits/women/29.jpg"
+  },
+  {
+    "name": "Kunal Yadav",
+    "bio": "Photographer. Focuses on documentary-style student stories.",
+    "role": "Photographers",
+    "profilePic": "https://randomuser.me/api/portraits/men/39.jpg"
+  },
+
+  {
+    "name": "Kabir Joshi",
+    "bio": "Illustrator. Brings stories to life with art.",
+    "role": "Illustrators",
+    "profilePic": "https://randomuser.me/api/portraits/men/23.jpg"
+  },
+  {
+    "name": "Sonia Arora",
+    "bio": "Illustrator. Enjoys sketching editorial cartoons and graphics.",
+    "role": "Illustrators",
+    "profilePic": "https://randomuser.me/api/portraits/women/33.jpg"
+  },
+  {
+    "name": "Vikram Desai",
+    "bio": "Illustrator. Focused on digital art and character design.",
+    "role": "Illustrators",
+    "profilePic": "https://randomuser.me/api/portraits/men/14.jpg"
+  },
+  {
+    "name": "Pooja Chawla",
+    "bio": "Illustrator. Creates engaging cover art and visual narratives.",
+    "role": "Illustrators",
+    "profilePic": "https://randomuser.me/api/portraits/women/47.jpg"
+  },
+
+  {
+    "name": "Simran Kaur",
+    "bio": "Developer. Codes the backbone of our digital magazine.",
+    "role": "Developers",
+    "profilePic": "https://randomuser.me/api/portraits/women/12.jpg"
+  },
+  {
+    "name": "Nikhil Saxena",
+    "bio": "Developer. Specializes in backend and database systems.",
+    "role": "Developers",
+    "profilePic": "https://randomuser.me/api/portraits/men/9.jpg"
+  },
+  {
+    "name": "Aditi Joshi",
+    "bio": "Developer. Builds smooth and responsive front-end features.",
+    "role": "Developers",
+    "profilePic": "https://randomuser.me/api/portraits/women/52.jpg"
+  },
+  {
+    "name": "Harsh Vardhan",
+    "bio": "Developer. Interested in AI integrations and web performance.",
+    "role": "Developers",
+    "profilePic": "https://randomuser.me/api/portraits/men/85.jpg"
+  }
+]

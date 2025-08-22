@@ -1,0 +1,249 @@
+"use client"
+
+import { useState, useEffect } from 'react'
+import { useAuth } from '../../context/AuthContext'
+import { apiFetch } from '../../utils/api'
+import EditionUploadModal from '../../components/EditionUploadModal'
+
+export default function EditionsPage() {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [editions, setEditions] = useState([])
+  const [loading, setLoading] = useState(true)
+  const { user } = useAuth();
+  const [showModal, setShowModal] = useState(false);
+
+  const fetchEditions = () => {
+    setLoading(true);
+    apiFetch('/edition')
+      .then(res => setEditions(res.editions))
+      .finally(() => setLoading(false));
+  };
+  useEffect(() => {
+    fetchEditions();
+  }, []);
+
+  const router = require('next/navigation').useRouter();
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      router.push(`/editions/search?q=${encodeURIComponent(searchTerm.trim())}`);
+    }
+  };
+
+  const filteredEditions = editions.filter(e =>
+    searchTerm ? String(e.editionNumber).includes(searchTerm) : true
+  );
+
+  // Top 3 for latest, rest for previous
+  const latestEditions = filteredEditions.slice(0, 3);
+  const previousEditions = filteredEditions.slice(3);
+
+  const nextPage = () => {
+    setCurrentPage(prev => prev + 1)
+  }
+
+  const prevPage = () => {
+    setCurrentPage(prev => Math.max(1, prev - 1))
+  }
+
+  return (
+    <div className="min-h-screen pt-20" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      {/* Search Section */}
+      <section className="py-2   px-6 ">
+        <div className="max-w-7xl mx-auto flex justify-center">
+          <form className="relative w-full max-w-lg" onSubmit={handleSearchSubmit}>
+            <input
+              type="text"
+              placeholder="Search by #Edition Number"
+              value={searchTerm}
+              onChange={handleSearch}
+              className="search-input w-full py-4 px-6 pr-12 border-2 rounded-full text-base outline-none transition-all duration-300 focus:ring-4"
+              style={{ 
+                backgroundColor: 'var(--bg-primary)', 
+                color: 'var(--text-primary)', 
+                borderColor: 'var(--border-color)',
+                '--tw-ring-color': 'rgba(37, 99, 235, 0.1)'
+              }}
+            />
+            <button type="submit" className="search-button absolute right-4 top-1/2 transform -translate-y-1/2 text-xl transition-colors duration-300 cursor-pointer" 
+                    style={{ color: 'var(--text-secondary)' }}
+                    aria-label="Search">
+              🔍
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* Latest Editions Section */}
+      <section className="py-12 px-6" style={{ backgroundColor: 'var(--bg-primary)' }}>
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-8 text-left" 
+              style={{ color: 'var(--text-primary)' }}>
+            Latest Editions:
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Add a Magazine Card (editors/admins only) */}
+            {user && (user.role === 'editor' || user.role === 'admin') && (
+              <div className="latest-edition-card transition-transform duration-300 hover:-translate-y-2">
+                <div className="edition-placeholder border-2 border-dashed rounded-2xl aspect-[1275/1650] max-h-[650px] w-[85%] mx-auto flex items-center justify-center text-lg font-medium transition-all duration-300 relative overflow-hidden cursor-pointer"
+                     style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--accent)', color: 'var(--accent)' }}
+                     onClick={() => setShowModal(true)}>
+                  <div className="text-center">
+                    <div className="text-4xl mb-2 transition-transform duration-300 hover:scale-110">+</div>
+                    <div className="font-semibold">Add New Edition</div>
+                    <div className="text-sm mt-2 opacity-70">Upload a new magazine edition</div>
+                  </div>
+                </div>
+              </div>
+            )}
+            {showModal && <EditionUploadModal open={showModal} onClose={() => setShowModal(false)} onUploaded={fetchEditions} />}
+
+            {loading ? (
+              <div>Loading editions...</div>
+            ) : latestEditions.map((edition) => (
+              <div key={edition._id} className="latest-edition-card transition-transform duration-300 hover:-translate-y-2 relative">
+                {user && (user.role === 'editor' || user.role === 'admin') && (
+                  <div className="absolute top-2 right-2 flex gap-2 z-10">
+                    <button
+                      title="Delete"
+                      onClick={async (e) => {
+                        e.preventDefault();
+                        if (window.confirm('Delete this edition?')) {
+                          await apiFetch(`/edition/${edition._id}`, {
+                            method: 'DELETE',
+                            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                          });
+                          fetchEditions();
+                        }
+                      }}
+                      className="p-2 rounded-full cursor-pointer bg-red-200 text-xs">🗑️</button>
+                  </div>
+                )}
+                <a href={`/editions/view/${edition.editionNumber}`} className="block">
+                  <div className="edition-placeholder border-2 border-dashed rounded-2xl aspect-[1275/1650] max-h-[650px] w-[85%] mx-auto flex items-center justify-center text-lg font-medium transition-all duration-300 relative overflow-hidden cursor-pointer"
+                       style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-color)', color: 'var(--text-secondary)' }}>
+                    <div className="absolute inset-0 w-full h-full">
+                      {edition.coverPicUrl ? (
+                        <img
+                          src={edition.coverPicUrl}
+                          alt={`Edition ${edition.editionNumber} Cover`}
+                          className="w-full h-full object-contain rounded-2xl"
+                          style={{ zIndex: 0, objectFit: 'contain', aspectRatio: '1275/1650', background: 'white' }}
+                        />
+                      ) : (
+                        <div className="flex flex-col items-center justify-center h-full w-full z-10 relative">
+                          <div className="text-4xl mb-2">📖</div>
+                          <div>Edition #{edition.editionNumber}</div>
+                          <div className="text-sm mt-2" style={{ color: 'var(--text-secondary)' }}>Click to view</div>
+                        </div>
+                      )}
+                      {edition.coverPicUrl && (
+                        <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-40 text-white text-center py-2 z-20 rounded-b-2xl">
+                          Edition #{edition.editionNumber}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Previous Editions Section */}
+      <section className="py-12 px-6" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-8 text-left" 
+              style={{ color: 'var(--text-primary)' }}>
+            Previous Editions
+          </h2>
+          <div className="flex flex-col lg:flex-row items-center gap-8">
+            <button 
+              className="pagination-arrow w-12 h-12 lg:w-16 lg:h-16 rounded-full border-2 flex items-center justify-center text-2xl lg:text-3xl font-bold transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed order-1 lg:order-none cursor-pointer"
+              style={{ 
+                backgroundColor: 'var(--bg-primary)', 
+                borderColor: 'var(--border-color)', 
+                color: 'var(--text-primary)' 
+              }}
+              onClick={prevPage}
+              disabled={currentPage === 1}
+              aria-label="Previous page"
+            >
+              ‹
+            </button>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 flex-1 order-0 lg:order-none">
+              {loading ? (
+                <div>Loading editions...</div>
+              ) : previousEditions.map((edition) => (
+                  <div key={edition._id} className="previous-edition-card transition-transform duration-300 hover:-translate-y-2 relative">
+                    {user && (user.role === 'editor' || user.role === 'admin') && (
+                      <div className="absolute top-2 right-2 flex gap-2 z-10">
+                        <button
+                          title="Delete"
+                          onClick={async (e) => {
+                            e.preventDefault();
+                            if (window.confirm('Delete this edition?')) {
+                              await apiFetch(`/edition/${edition._id}`, {
+                                method: 'DELETE',
+                                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                              });
+                              fetchEditions();
+                            }
+                          }}
+                          className="p-2 rounded-full bg-red-200 text-xs">🗑️</button>
+                      </div>
+                    )}
+                    <a href={`/editions/view/${edition.editionNumber}`} className="block">
+                      <div className="edition-placeholder border-2 border-dashed rounded-2xl aspect-[1275/1650] max-h-[650px] w-[85%] mx-auto flex items-center justify-center text-lg font-medium transition-all duration-300 relative overflow-hidden cursor-pointer"
+                           style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-color)', color: 'var(--text-secondary)' }}>
+                        <div className="absolute inset-0 w-full h-full">
+                          {edition.coverPicUrl ? (
+                            <img
+                              src={edition.coverPicUrl}
+                              alt={`Edition ${edition.editionNumber} Cover`}
+                              className="w-full h-full object-contain rounded-2xl"
+                              style={{ zIndex: 0, objectFit: 'contain', aspectRatio: '1275/1650', background: 'white' }}
+                            />
+                          ) : (
+                            <div className="flex flex-col items-center justify-center h-full w-full z-10 relative">
+                              <div className="text-4xl mb-2">📰</div>
+                              <div>Edition #{edition.editionNumber}</div>
+                              <div className="text-sm mt-2" style={{ color: 'var(--text-secondary)' }}>Click to view</div>
+                            </div>
+                          )}
+                          {edition.coverPicUrl && (
+                            <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-40 text-white text-center py-2 z-20 rounded-b-2xl">
+                              Edition #{edition.editionNumber}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                ))}
+            </div>
+
+            <button 
+              className="pagination-arrow w-12 h-12 lg:w-16 lg:h-16 rounded-full border-2 flex items-center justify-center text-2xl lg:text-3xl font-bold transition-all duration-300 hover:scale-105 order-2 lg:order-none cursor-pointer"
+              style={{ 
+                backgroundColor: 'var(--bg-primary)', 
+                borderColor: 'var(--border-color)', 
+                color: 'var(--text-primary)' 
+              }}
+              onClick={nextPage}
+              aria-label="Next page"
+            >
+              ›
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
