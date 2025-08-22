@@ -8,10 +8,19 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors({
-	origin: process.env.CORS_ORIGINS?.split(',') || '*',
-	credentials: true
-}));
+
+const allowedOrigins = process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : [];
+const corsOptions = {
+	origin: (origin, callback) => {
+		if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+			callback(null, true);
+		} else {
+			callback(new Error('Not allowed by CORS'));
+		}
+	},
+	credentials: true,
+};
+app.use(cors(corsOptions));
 
 // Log every request URL
 app.use((req, res, next) => {
