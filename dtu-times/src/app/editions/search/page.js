@@ -1,12 +1,10 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from 'react'
+import { Suspense } from 'react';
 import Image from 'next/image';
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useAuth } from '../../../context/AuthContext'
-import { apiFetch } from '../../../utils/api'
+import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function EditionSearchPage() {
+function EditionSearchPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { user } = useAuth();
@@ -142,5 +140,13 @@ export default function EditionSearchPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function EditionSearchPage() {
+  return (
+    <Suspense>
+      <EditionSearchPageInner />
+    </Suspense>
   );
 }
