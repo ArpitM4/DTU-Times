@@ -203,33 +203,33 @@ export default function Navbar() {
               <span className="absolute left-4 right-4 -bottom-1 h-0.5 bg-teal-500 rounded-full animate-fadeIn" />
             )}
           </Link>
-          <a href="/editions" className={`mobile-nav-link p-4 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/editions' ? 'text-teal-500' : ''}`}
+          <Link href="/editions" className={`mobile-nav-link p-4 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/editions' ? 'text-teal-500' : ''}`}
              style={{ color: pathname === '/editions' ? '#14b8a6' : 'var(--text-secondary)' }}
              onClick={closeMenu}>
             Editions
             {pathname === '/editions' && (
               <span className="absolute left-4 right-4 -bottom-1 h-0.5 bg-teal-500 rounded-full animate-fadeIn" />
             )}
-          </a>
-          <a href="/blog" className={`mobile-nav-link p-4 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/blog' ? 'text-teal-500' : ''}`}
+          </Link>
+          <Link href="/blog" className={`mobile-nav-link p-4 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/blog' ? 'text-teal-500' : ''}`}
              style={{ color: pathname === '/blog' ? '#14b8a6' : 'var(--text-secondary)' }}
              onClick={closeMenu}>
             Blogs
             {pathname === '/blog' && (
               <span className="absolute left-4 right-4 -bottom-1 h-0.5 bg-teal-500 rounded-full animate-fadeIn" />
             )}
-          </a>
-          <a href="/contact" className={`mobile-nav-link p-4 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/contact' ? 'text-teal-500' : ''}`}
+          </Link>
+          <Link href="/contact" className={`mobile-nav-link p-4 rounded-lg font-medium transition-all duration-300 relative group ${pathname === '/contact' ? 'text-teal-500' : ''}`}
              style={{ color: pathname === '/contact' ? '#14b8a6' : 'var(--text-secondary)' }}
              onClick={closeMenu}>
             Contact Us
             {pathname === '/contact' && (
               <span className="absolute left-4 right-4 -bottom-1 h-0.5 bg-teal-500 rounded-full animate-fadeIn" />
             )}
-          </a>
+          </Link>
           {/* Profile link for mobile */}
           {user && (
-            <a
+            <Link
               href="/profile"
               className={`mobile-nav-link p-4 rounded-lg font-medium transition-all duration-300 relative group`}
               style={{
@@ -250,10 +250,10 @@ export default function Navbar() {
               }}
             >
               <span className="flex items-center gap-2">
-                {user.profilePic && <img src={user.profilePic} alt="Profile" className="w-6 h-6 rounded-full object-cover" />}
+                {user.profilePic && <Image src={user.profilePic} alt="Profile" width={24} height={24} className="w-6 h-6 rounded-full object-cover" />}
                 Profile
               </span>
-            </a>
+            </Link>
           )}
         </div>
       </div>

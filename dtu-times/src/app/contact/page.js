@@ -1,7 +1,9 @@
 
+
 'use client'
 import ContactForm from '@/components/ContactForm'
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ContactPage() {
   const contactMethods = [
@@ -190,14 +192,14 @@ export default function ContactPage() {
       <div className="max-w-2xl mx-auto mt-20 flex flex-col md:flex-row gap-8 items-center justify-center">
         {/* Editor 1 */}
         <div className="flex flex-col items-center text-center p-6 rounded-xl border" style={{ borderColor: 'var(--border-color)', background: 'var(--bg-secondary)' }}>
-          <img src="https://via.placeholder.com/80x80/6366f1/ffffff?text=AS" alt="Arpit Sharma" className="w-20 h-20 rounded-full mb-3 border" style={{ borderColor: 'var(--accent)' }} />
+          <Image src="https://via.placeholder.com/80x80/6366f1/ffffff?text=AS" alt="Arpit Sharma" width={80} height={80} className="w-20 h-20 rounded-full mb-3 border" style={{ borderColor: 'var(--accent)' }} />
           <div className="font-semibold text-lg" style={{ color: 'var(--text-primary)' }}>Arpit Sharma</div>
           <div className="text-xs opacity-70 mb-1" style={{ color: 'var(--text-secondary)' }}>Editor-in-Chief</div>
           <a href="mailto:arpit@dtutimes.com" className="text-xs underline opacity-80 hover:opacity-100 cursor-pointer" style={{ color: 'var(--accent)' }}>arpit@dtutimes.com</a>
         </div>
         {/* Editor 2 */}
         <div className="flex flex-col items-center text-center p-6 rounded-xl border" style={{ borderColor: 'var(--border-color)', background: 'var(--bg-secondary)' }}>
-          <img src="https://via.placeholder.com/80x80/8b5cf6/ffffff?text=PS" alt="Priya Singh" className="w-20 h-20 rounded-full mb-3 border" style={{ borderColor: 'var(--accent)' }} />
+          <Image src="https://via.placeholder.com/80x80/8b5cf6/ffffff?text=PS" alt="Priya Singh" width={80} height={80} className="w-20 h-20 rounded-full mb-3 border" style={{ borderColor: 'var(--accent)' }} />
           <div className="font-semibold text-lg" style={{ color: 'var(--text-primary)' }}>Priya Singh</div>
           <div className="text-xs opacity-70 mb-1" style={{ color: 'var(--text-secondary)' }}>Managing Editor</div>
           <a href="mailto:priya@dtutimes.com" className="text-xs underline opacity-80 hover:opacity-100 cursor-pointer" style={{ color: 'var(--accent)' }}>priya@dtutimes.com</a>

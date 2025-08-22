@@ -1,7 +1,9 @@
 "use client"
 
+
 import { useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
+import Link from 'next/link';
 
 export default function EditorLoginPage() {
   const [formData, setFormData] = useState({
@@ -160,7 +162,7 @@ export default function EditorLoginPage() {
         <div className="text-center p-6 rounded-2xl" 
              style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
           <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
-            Don't have an editor account?
+            Don&apos;t have an editor account?
           </p>
           <button
             onClick={goToSignup}
@@ -184,12 +186,12 @@ export default function EditorLoginPage() {
 
         {/* Back to Home */}
         <div className="text-center mt-6">
-          <a href="/" className="text-sm font-medium transition-colors duration-300 hover:underline"
+          <Link href="/" className="text-sm font-medium transition-colors duration-300 hover:underline"
              style={{ color: 'var(--text-secondary)' }}
              onMouseEnter={(e) => e.target.style.color = 'var(--accent)'}
              onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>
-            ← Back to DTU Times
-          </a>
+              Back to DTU Times
+          </Link>
         </div>
       </div>
     </div>

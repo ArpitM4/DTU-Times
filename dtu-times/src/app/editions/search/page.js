@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '../../../context/AuthContext'
 import { apiFetch } from '../../../utils/api'
@@ -112,9 +113,11 @@ export default function EditionSearchPage() {
                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-color)', color: 'var(--text-secondary)' }}>
                     <div className="absolute inset-0 w-full h-full">
                       {edition.coverPicUrl ? (
-                        <img
+                        <Image
                           src={edition.coverPicUrl}
                           alt={`Edition ${edition.editionNumber} Cover`}
+                          width={1275}
+                          height={1650}
                           className="w-full h-full object-contain rounded-2xl"
                           style={{ zIndex: 0, objectFit: 'contain', aspectRatio: '1275/1650', background: 'white' }}
                         />
