@@ -28,8 +28,11 @@ app.use('/api/pdf-proxy', require('./routes/pdf-proxy'));
 
 // Connect to MongoDB and start server
 const PORT = process.env.PORT || 5000;
+console.log('Attempting to connect to MongoDB...');
+console.log('MongoDB URI:', process.env.MONGODB_URI);
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 	.then(() => {
+		console.log('MongoDB connection successful!');
 		app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 	})
 	.catch((err) => {
