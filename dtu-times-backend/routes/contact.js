@@ -25,7 +25,8 @@ router.post('/', async (req, res) => {
     });
     res.status(201).json({ message: 'Message sent' });
   } catch (err) {
-    res.status(500).json({ message: 'Server error', error: err.message });
+  console.error('Contact route error:', err);
+  res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
 

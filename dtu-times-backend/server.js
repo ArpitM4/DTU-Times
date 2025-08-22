@@ -19,7 +19,9 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/user'));
 app.use('/api/edition', require('./routes/edition'));
 app.use('/api/blog', require('./routes/blog'));
+
 app.use('/api/contact', require('./routes/contact'));
+app.use('/api/newsletter', require('./routes/newsletter'));
 
 // PDF Proxy route for inline display
 app.use('/api/pdf-proxy', require('./routes/pdf-proxy'));

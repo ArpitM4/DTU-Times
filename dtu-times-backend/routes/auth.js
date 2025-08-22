@@ -3,12 +3,16 @@ const router = express.Router();
 const User = require('../models/User');
 const { hashPassword, comparePassword } = require('../utils/hash');
 const { generateToken } = require('../utils/jwt');
+const { signupSchema, loginSchema } = require('../zodSchemas');
 
 // Register (Sign Up)
 router.post('/signup', async (req, res) => {
   try {
-    const { name, email, password, profilePic } = req.body;
-    if (!name || !email || !password) return res.status(400).json({ message: 'All fields are required' });
+    const parseResult = signupSchema.safeParse(req.body);
+    if (!parseResult.success) {
+      return res.status(400).json({ message: 'Invalid input', errors: parseResult.error.errors });
+    }
+    const { name, email, password, profilePic } = parseResult.data;
     const existing = await User.findOne({ email });
     if (existing) return res.status(409).json({ message: 'Email already registered' });
     const hashed = await hashPassword(password);
@@ -23,7 +27,11 @@ router.post('/signup', async (req, res) => {
 // Login
 router.post('/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const parseResult = loginSchema.safeParse(req.body);
+    if (!parseResult.success) {
+      return res.status(400).json({ message: 'Invalid input', errors: parseResult.error.errors });
+    }
+    const { email, password } = parseResult.data;
     const user = await User.findOne({ email });
     if (!user) return res.status(401).json({ message: 'Invalid credentials' });
     if (user.status !== 'verified') return res.status(403).json({ message: 'Account not verified or rejected' });

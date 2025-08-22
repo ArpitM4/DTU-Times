@@ -17,15 +17,7 @@ router.post('/', auth, upload.fields([
     if (!editionNumber || !req.files?.pdf || !req.files?.coverPic) return res.status(400).json({ message: 'All fields required' });
     const exists = await Edition.findOne({ editionNumber });
     if (exists) return res.status(409).json({ message: 'Edition number already exists' });
-    // Upload files to Cloudinary
-    const pdfUpload = await cloudinary.uploader.upload_stream({ resource_type: 'raw', folder: 'editions' }, (error, result) => {
-      if (error) throw error;
-      return result;
-    });
-    const coverUpload = await cloudinary.uploader.upload_stream({ folder: 'editions/covers' }, (error, result) => {
-      if (error) throw error;
-      return result;
-    });
+  // Remove unused upload_stream calls with throw error (handled below with Promises)
     // Actually upload
     const pdfResult = await new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream({ resource_type: 'raw', folder: 'editions' }, (err, result) => {

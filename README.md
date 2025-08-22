@@ -1,21 +1,43 @@
 
+
 # 📰 DTU Times - Digital Magazine Platform
 
-A modern, artistic digital magazine platform built for Delhi Technological University using Next.js and Tailwind CSS. Features a clean, minimalistic design with comprehensive content management and interactive user experiences.
+A modern, full-stack digital magazine platform for Delhi Technological University, featuring a Next.js/Tailwind CSS frontend and a robust Node.js/Express/MongoDB backend. Includes authentication, content management, PDF viewer, and advanced validation.
 
 ## 🌟 Features
 
 ### 🎨 Design & UI/UX
+
+### 🎨 Frontend (Next.js)
 - **Dark/Light Theme Toggle** - Seamless theme switching with CSS variables
-- **Responsive Design** - Mobile-first approach with perfect cross-device compatibility
-- **Teal Accent Color Scheme** - Modern, artistic color palette (#14b8a6)
-- **Smooth Animations** - CSS transitions and hover effects throughout
-- **Clean Typography** - Professional font hierarchy and spacing
-- **Glassmorphism Effects** - Backdrop blur and modern visual effects
+- **Responsive Design** - Mobile-first, cross-device compatibility
+- **Modern UI/UX** - Teal accent, glassmorphism, smooth animations
+- **Smart Navbar & Sidebar** - Auto-hide, active link indicators, mobile menu
+- **Blog System** - Interactive listing, featured slider, star/bookmark, category organization
+- **Blog Post Details** - Immersive hero, reading progress, author bio, related posts, social sharing
+- **Editions Archive** - PDF magazine viewer, grid layout, full-screen reader
+- **Gallery** - Masonry grid, lightbox, categorized sections
+- **Contact & About Pages** - Professional forms, info, and validation
+- **Newsletter** - Floating subscribe button, modal, animation
+- **Authentication** - Editor login/signup, client-side validation, protected routes
+- **Error Handling** - Graceful fallbacks for images/content
 
 ### 🏠 Homepage
+- **RESTful API** - CRUD for blogs, editions, users, contact, newsletter
+- **Authentication** - JWT-based, role-based access (admin/editor/user)
+- **File Uploads** - Cloudinary integration for images, PDFs
+- **Data Validation** - Zod schemas for all major endpoints (signup, login, blog, edition, contact, newsletter)
+- **Security** - Password hashing, input validation, CORS, rate limiting (recommended)
+- **Admin Controls** - User verification, edition/blog moderation
+- **Email Integration** - Nodemailer for contact/notification
+- **Error Handling** - Consistent API error responses
 - **Full-Screen Hero Sections** - Immersive landing experience
 - **Smart Navigation Arrows** - Section-by-section scrolling with smooth transitions
+- **Next.js 15.4.7** - App Router, SSR, image optimization
+- **Component Architecture** - Modular, reusable, scalable
+- **TypeScript Ready** - JavaScript with migration path
+- **CSS Variables & Tailwind** - Dynamic theming, utility-first styling
+- **API Integration** - Frontend-backend separation, RESTful calls
 - **Mobile-Optimized** - Hidden scroll arrows on mobile with touch-friendly interface
 - **Dynamic Theme Integration** - Consistent theming across all sections
 
@@ -76,53 +98,29 @@ A modern, artistic digital magazine platform built for Delhi Technological Unive
 - **Component Architecture** - Modular, reusable components
 - **TypeScript Ready** - JavaScript with migration path to TypeScript
 
+
 ## 🏗️ Project Structure
 
 ```
 dtu-times/
 ├── src/
-│   ├── app/
-│   │   ├── about/
-│   │   │   └── page.js                 # About page
-│   │   ├── blog/
-│   │   │   ├── [id]/
-│   │   │   │   └── page.js            # Individual blog post page
-│   │   │   └── page.js                # Blog listing page
-│   │   ├── contact/
-│   │   │   └── page.js                # Contact us page
-│   │   ├── editions/
-│   │   │   ├── [id]/
-│   │   │   │   └── page.js            # PDF edition viewer
-│   │   │   └── page.js                # Editions archive
-│   │   ├── editor/
-│   │   │   ├── login/
-│   │   │   │   └── page.js            # Editor login
-│   │   │   └── signup/
-│   │   │       └── page.js            # Editor signup
-│   │   ├── gallery/
-│   │   │   └── page.js                # Gallery showcase
-│   │   ├── favicon.ico                # Site favicon
-│   │   ├── globals.css                # Global styles and CSS variables
-│   │   ├── layout.js                  # Root layout with theme provider
-│   │   └── page.js                    # Homepage
-│   ├── components/
-│   │   ├── Footer.js                  # Site footer
-│   │   ├── GalleryImage.js            # Gallery image component
-│   │   ├── Lightbox.js                # Image lightbox modal
-│   │   ├── MasonryGrid.js             # Masonry layout grid
-│   │   ├── Navbar.js                  # Navigation header
-│   │   └── Newsletter.js              # Newsletter subscription
-│   └── context/
-│       └── ThemeContext.js            # Theme management context
-├── public/                            # Static assets
-├── .eslintrc.json                     # ESLint configuration
-├── .gitignore                         # Git ignore rules
-├── jsconfig.json                      # JavaScript configuration
-├── next.config.js                     # Next.js configuration
-├── package.json                       # Dependencies and scripts
-├── postcss.config.js                  # PostCSS configuration
-├── README.md                          # Project documentation
-└── tailwind.config.js                 # Tailwind CSS configuration
+│   ├── app/                # Next.js frontend (pages, layouts, routes)
+│   ├── components/         # Reusable React components
+│   ├── context/            # React context (theme, auth)
+├── public/                 # Static assets (images, icons, etc)
+├── dtu-times-backend/      # Express backend API
+│   ├── models/             # Mongoose models (User, Blog, Edition, etc)
+│   ├── routes/             # Express routes (auth, blog, edition, contact, etc)
+│   ├── middleware/         # Auth, upload, error handling
+│   ├── utils/              # Utility functions (hash, jwt, cloudinary)
+│   ├── zodSchemas.js       # Central Zod validation schemas
+│   └── server.js           # Express app entry point
+├── .eslintrc.json          # ESLint configuration
+├── jsconfig.json           # JS config
+├── next.config.js          # Next.js config
+├── package.json            # Dependencies
+├── README.md               # Project documentation
+└── tailwind.config.js      # Tailwind CSS config
 ```
 
 ## 🎨 Design System
@@ -142,11 +140,13 @@ dtu-times/
 - **Cards**: Unified border radius and shadow styles
 - **Forms**: Standardized input styling and validation
 
+
 ## 🚀 Getting Started
 
 ### Prerequisites
 - Node.js (v18 or higher)
-- npm or yarn package manager
+- npm or yarn
+- MongoDB (local or cloud)
 
 ### Installation
 
@@ -156,34 +156,56 @@ dtu-times/
    cd dtu-times
    ```
 
-2. **Install dependencies**
+2. **Install dependencies (frontend & backend)**
    ```bash
    npm install
+   cd dtu-times-backend
+   npm install
+   cd ..
    ```
 
-3. **Run development server**
+3. **Configure environment variables**
+   - Create `.env` files for both frontend and backend as needed (see sample.env)
+
+4. **Run backend API**
    ```bash
+   cd dtu-times-backend
+   npm start
+   ```
+
+5. **Run frontend (Next.js)**
+   ```bash
+   cd ..
    npm run dev
    ```
 
-4. **Open in browser**
+6. **Open in browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ### Build for Production
 
 ```bash
-npm run build
-npm start
+cd dtu-times-backend && npm start & cd .. && npm run build && npm start
 ```
+
 
 ## 🛠️ Technology Stack
 
-- **Framework**: Next.js 15.4.7
-- **Styling**: Tailwind CSS
+### Frontend
+- **Framework**: Next.js 15.4.7 (App Router)
+- **Styling**: Tailwind CSS, CSS variables
 - **Language**: JavaScript (TypeScript ready)
-- **Architecture**: App Router
-- **State Management**: React Context + useState
+- **State Management**: React Context, useState
 - **Deployment**: Vercel (recommended)
+
+### Backend
+- **Framework**: Node.js, Express.js
+- **Database**: MongoDB (Mongoose ODM)
+- **Validation**: Zod (robust schema validation)
+- **Authentication**: JWT, role-based access
+- **File Uploads**: Multer, Cloudinary
+- **Email**: Nodemailer
+- **Security**: bcrypt, CORS, input validation
 
 ## 📱 Browser Compatibility
 
@@ -193,16 +215,18 @@ npm start
 - Edge (latest)
 - Mobile browsers (iOS Safari, Chrome Mobile)
 
+
 ## 🎯 Future Enhancements
 
-- [ ] Content Management System (CMS) integration
-- [ ] User authentication and profiles
-- [ ] Comment system for blog posts
-- [ ] Search functionality
+- [ ] CMS integration (Strapi, Sanity, etc)
+- [ ] Advanced user profiles & permissions
+- [ ] Comment system for blogs
+- [ ] Full-text search (Elastic, MongoDB Atlas)
 - [ ] Push notifications
-- [ ] Offline reading support
-- [ ] Multi-language support
+- [ ] Offline/PWA support
+- [ ] Multi-language (i18n)
 - [ ] Analytics dashboard
+- [ ] Rate limiting, security hardening
 
 ## 📄 License
 
