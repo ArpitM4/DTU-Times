@@ -1,4 +1,6 @@
 
+'use client';
+
 import React, { useEffect, useState, useRef } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { apiFetch } from '../utils/api';

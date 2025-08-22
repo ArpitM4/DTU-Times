@@ -1,7 +1,7 @@
 "use client";
 
-
 import { useAuth } from "../../context/AuthContext";
+import Image from 'next/image';
 
 export default function ProfilePage() {
   const { user } = useAuth();
@@ -51,10 +51,12 @@ export default function ProfilePage() {
         <div className="flex justify-center">
           <div className="space-y-12 text-center">
             <div className="flex flex-col items-center gap-4">
-              <img
+              <Image
                 src={user.profilePic || "/default-profile.png"}
                 alt="Profile"
                 className="w-28 h-28 rounded-full border-4 border-gray-200 dark:border-gray-700 shadow-md object-cover mb-2"
+                width={112}
+                height={112}
               />
               <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {user.name}

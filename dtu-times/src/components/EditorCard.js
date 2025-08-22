@@ -1,4 +1,5 @@
-'use client'
+"use client";
+import Image from 'next/image';
 
 export default function EditorCard({ name, title, email, imageUrl }) {
   return (
@@ -10,11 +11,13 @@ export default function EditorCard({ name, title, email, imageUrl }) {
       <div className="flex items-center gap-4">
         {/* Editor Image */}
         <div className="flex-shrink-0">
-          <img 
+          <Image 
             src={imageUrl} 
             alt={`${name} - ${title}`}
             className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 transition-all duration-300"
             style={{ borderColor: 'var(--accent)' }}
+            width={96}
+            height={96}
           />
         </div>
         

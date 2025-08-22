@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import Image from 'next/image';
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -15,10 +16,12 @@ export default function BlogCard({ post }) {
       tabIndex={0}
     >
       <div className="aspect-video w-full overflow-hidden">
-        <img
+        <Image
           src={post.imageUrl}
           alt={post.title}
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+          width={640}
+          height={360}
           loading="lazy"
         />
       </div>

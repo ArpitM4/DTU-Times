@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image';
 
 export default function GalleryImage({ image, onClick, index }) {
   const [isHovered, setIsHovered] = useState(false)
@@ -53,7 +54,7 @@ export default function GalleryImage({ image, onClick, index }) {
       
       {/* Image */}
       {!hasError && (
-        <img
+  <Image
           src={image.url}
           alt={image.alt}
           className={`w-full h-auto object-cover rounded-lg transition-all duration-500 ${

@@ -1,5 +1,7 @@
-'use client'
+"use client";
 import { useTheme } from '../context/ThemeContext';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   const { theme } = useTheme();
@@ -8,8 +10,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
-            <a href="/" className="no-underline flex items-center mb-4" style={{ color: 'inherit' }}>
-              <img
+            <Link href="/" className="no-underline flex items-center mb-4" style={{ color: 'inherit' }}>
+              <Image
                 src="/TimesLogo.png"
                 alt="DTU Times Logo"
                 className="h-10 w-auto"
@@ -19,8 +21,11 @@ export default function Footer() {
                   filter: theme === 'light' ? 'invert(1) hue-rotate(180deg)' : 'none',
                   transition: 'filter 0.3s'
                 }}
+                width={40}
+                height={40}
+                priority
               />
-            </a>
+            </Link>
             <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               Digital magazine platform showcasing the latest editions from DTU Times society.
             </p>
@@ -30,28 +35,28 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Quick Links</h4>
             <ul className="flex flex-col gap-2">
               <li>
-                <a href="#" className="footer-link transition-colors duration-300" 
+                <Link href="/about" className="footer-link transition-colors duration-300" 
                    style={{ color: 'var(--text-secondary)' }}>
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/editions" className="footer-link transition-colors duration-300" 
+                <Link href="/editions" className="footer-link transition-colors duration-300" 
                    style={{ color: 'var(--text-secondary)' }}>
                   Editions
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="footer-link transition-colors duration-300" 
+                <Link href="/blog" className="footer-link transition-colors duration-300" 
                    style={{ color: 'var(--text-secondary)' }}>
                   Blogs
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="footer-link transition-colors duration-300" 
+                <Link href="/contact" className="footer-link transition-colors duration-300" 
                    style={{ color: 'var(--text-secondary)' }}>
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -60,28 +65,28 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Connect</h4>
             <ul className="flex flex-col gap-2">
               <li>
-                <a href="#" className="footer-link transition-colors duration-300" 
-                   style={{ color: 'var(--text-secondary)' }}>
+                <a href="https://instagram.com" className="footer-link transition-colors duration-300" 
+                   style={{ color: 'var(--text-secondary)' }} target="_blank" rel="noopener noreferrer">
                   Instagram
                 </a>
               </li>
               <li>
-                <a href="#" className="footer-link transition-colors duration-300" 
-                   style={{ color: 'var(--text-secondary)' }}>
+                <a href="https://linkedin.com" className="footer-link transition-colors duration-300" 
+                   style={{ color: 'var(--text-secondary)' }} target="_blank" rel="noopener noreferrer">
                   LinkedIn
                 </a>
               </li>
               <li>
-                <a href="#" className="footer-link transition-colors duration-300" 
-                   style={{ color: 'var(--text-secondary)' }}>
+                <a href="https://twitter.com" className="footer-link transition-colors duration-300" 
+                   style={{ color: 'var(--text-secondary)' }} target="_blank" rel="noopener noreferrer">
                   Twitter
                 </a>
               </li>
               <li>
-                <a href="/editor/signup" className="footer-link transition-colors duration-300 font-medium" 
+                <Link href="/editor/signup" className="footer-link transition-colors duration-300 font-medium" 
                    style={{ color: 'var(--accent)' }}>
                   Join as Editor
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
