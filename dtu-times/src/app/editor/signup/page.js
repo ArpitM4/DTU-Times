@@ -1,5 +1,5 @@
 "use client"
-
+import Link from 'next/link';
 import { useState } from 'react'
 import { useAuth } from '../../../context/AuthContext'
 
@@ -225,12 +225,12 @@ export default function EditorSignupPage() {
 
         {/* Back to Home */}
         <div className="text-center mt-6">
-          <a href="/" className="text-sm font-medium transition-colors duration-300 hover:underline"
+          <Link href="/" className="text-sm font-medium transition-colors duration-300 hover:underline"
              style={{ color: 'var(--text-secondary)' }}
              onMouseEnter={(e) => e.target.style.color = 'var(--accent)'}
              onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>
-            ← Back to DTU Times
-          </a>
+            &larr; Back to DTU Times
+          </Link>
         </div>
       </div>
     </div>

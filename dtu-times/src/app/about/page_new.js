@@ -1,6 +1,6 @@
 
-import Link from 'next/link';
 'use client'
+import Link from 'next/link';
 
 export default function AboutPage() {
   const teamValues = [
@@ -92,7 +92,7 @@ export default function AboutPage() {
             Our Mission
           </h2>
           <p className="text-lg leading-relaxed max-w-3xl mx-auto opacity-80" style={{ color: 'var(--text-secondary)' }}>
-            To bridge the gap between administration and students, celebrate achievements, share knowledge, and foster a sense of community that extends beyond graduation. We're here to document the DTU experience and ensure every voice is heard.
+            To bridge the gap between administration and students, celebrate achievements, share knowledge, and foster a sense of community that extends beyond graduation. We&apos;re here to document the DTU experience and ensure every voice is heard.
           </p>
         </div>
 
@@ -124,4 +124,3 @@ export default function AboutPage() {
   )
 }
 
-import Link from 'next/link';
