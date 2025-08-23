@@ -1,0 +1,220 @@
+DTU Times Project - Technical Interview Viva
+============================================
+
+---
+
+# 1. Next.js (Frontend Framework)
+
+**Q: What is Next.js and why did you use it?**
+A: Next.js is a React-based framework for building server-rendered and statically generated web applications. It provides features like file-based routing, API routes, SSR (Server-Side Rendering), SSG (Static Site Generation), and image optimization. We used it for its performance, SEO benefits, and modern developer experience.
+
+**Q: What is the difference between SSR and SSG in Next.js?**
+A: SSR (Server-Side Rendering) generates HTML on each request, while SSG (Static Site Generation) generates HTML at build time. SSR is good for dynamic data, SSG for static content. Next.js supports both.
+
+**Q: How does routing work in Next.js?**
+A: Routing is file-based. Each file in the `pages` or `app` directory becomes a route. Dynamic routes are created using brackets, e.g., `[slug].js`.
+
+**Q: What is the App Router in Next.js 13+?**
+A: The App Router (`src/app/`) is a new routing system that supports layouts, server components, and advanced data fetching. It replaces the old `pages/` directory for new projects.
+
+**Q: How does Next.js handle image optimization?**
+A: Next.js provides the `<Image />` component, which optimizes images for size and format. You must specify allowed domains in `next.config.js` for external images.
+
+---
+
+# 2. React.js (UI Library)
+
+**Q: What is React and why is it used here?**
+A: React is a JavaScript library for building user interfaces using components and hooks. It enables modular, reusable UI and efficient state management.
+
+**Q: What are hooks? Name a few used in this project.**
+A: Hooks are functions that let you use React features in functional components. Common hooks: `useState`, `useEffect`, `useContext`, `useRef`.
+
+**Q: What is Context API?**
+A: Context API allows sharing state (like theme or auth) across the component tree without prop drilling. Used here for theme and authentication.
+
+**Q: How is client-side navigation handled?**
+A: Using the `Link` component from Next.js, which enables fast, SPA-like navigation without full page reloads.
+
+---
+
+# 3. Node.js & Express (Backend)
+
+**Q: What is Node.js and why use Express?**
+A: Node.js is a runtime for running JavaScript on the server. Express is a minimal web framework for building APIs and web servers. It simplifies routing, middleware, and request handling.
+
+**Q: How is authentication handled?**
+A: Using JWT (JSON Web Tokens) for stateless authentication. Tokens are issued on login and verified on protected routes.
+
+**Q: How are files (PDFs, images) uploaded?**
+A: Using `multer` middleware for handling multipart/form-data uploads, and then uploading files to Cloudinary for storage.
+
+**Q: How is CORS handled?**
+A: CORS is configured using the `cors` package, with allowed origins set via environment variables for security.
+
+---
+
+# 4. MongoDB & Mongoose
+
+**Q: Why use MongoDB and Mongoose?**
+A: MongoDB is a NoSQL database, good for flexible, document-based data. Mongoose is an ODM (Object Data Modeling) library for defining schemas and interacting with MongoDB in Node.js.
+
+**Q: What are schemas and models?**
+A: Schemas define the structure of documents in a collection. Models are constructors compiled from schemas and used to interact with the database.
+
+---
+
+# 5. Libraries Used & Their Purpose
+
+- **Next.js**: Frontend framework (SSR, SSG, routing, image optimization)
+- **React**: UI library
+- **Tailwind CSS**: Utility-first CSS framework for styling
+- **Framer Motion**: Animations and transitions
+- **Mongoose**: MongoDB ODM for schema and data modeling
+- **Express**: Backend server and API routing
+- **Multer**: File upload middleware
+- **Cloudinary**: Cloud storage for images and PDFs
+- **Zod**: Schema validation for API inputs
+- **jsonwebtoken**: JWT authentication
+- **bcrypt**: Password hashing
+- **cors**: CORS middleware
+- **Nodemailer**: Sending emails (contact, notifications)
+
+---
+
+# 6. Problems Faced & Solutions
+
+**Q: What were some technical challenges in this project?**
+A:
+- CORS errors between frontend and backend: Fixed by configuring allowed origins in backend.
+- Image optimization errors (502/400) on Vercel: Solved by using `<img>` for domains that block optimization (e.g., randomuser.me).
+- File upload size limits: Increased multer limit and checked Cloudinary's max file size.
+- Dynamic port assignment for deployment: Used `process.env.PORT` for compatibility with platforms like Render.
+- Environment variable management: Used `.env` files for secrets and config.
+- Role-based access control: Implemented middleware to restrict routes by user role.
+
+---
+
+# 7. Project-Specific Questions
+
+**Q: How does the magazine (PDF) upload work?**
+A: Editors upload PDFs and cover images via a form. Files are handled by multer, then uploaded to Cloudinary. Metadata is saved in MongoDB.
+
+**Q: How are blogs managed?**
+A: Blogs are created, edited, and deleted by editors/admins. Each blog has a title, content, author, images, and slug. Blogs are displayed with rich content and images.
+
+**Q: How is the team section generated?**
+A: Team data is stored in a JSON file and rendered dynamically. Images from randomuser.me use `<img>`, others use Next.js `<Image>`.
+
+**Q: How is authentication and user management handled?**
+A: Signup requests are stored as unverified. Admins verify users. Only verified users can log in. JWT is used for session management.
+
+**Q: How is the UI made responsive and accessible?**
+A: Tailwind CSS, semantic HTML, and accessibility best practices (alt text, keyboard navigation, color contrast).
+
+---
+
+# 8. Other Potential Questions
+
+- How does SSR/SSG improve SEO?
+- What is the difference between client and server components in Next.js?
+- How are environment variables managed in production?
+- How do you handle errors and loading states in the UI?
+- How is role-based access enforced in the backend?
+- How is the PDF viewer implemented?
+- How do you handle image fallbacks and loading states?
+- What security measures are in place (hashing, validation, CORS, etc.)?
+
+---
+
+# 9. Improvements & Future Enhancements
+
+- Add rate limiting and advanced security
+- Integrate a CMS for easier content management
+- Add comments and notifications
+- Implement PWA/offline support
+- Add analytics and dashboards
+- Multi-language (i18n) support
+
+---
+
+---
+
+# 10. Advanced Technical Questions & Answers
+
+## Next.js & React Advanced
+
+**Q: Explain the difference between Server Components and Client Components in Next.js 13+.**
+A: Server Components run only on the server and never send their code to the client, making them ideal for data fetching and heavy logic. Client Components use 'use client' and can use browser APIs, state, and effects. Server Components improve performance and reduce bundle size, while Client Components are needed for interactivity.
+
+**Q: How does Next.js handle API routes and what are their limitations?**
+A: API routes in Next.js allow you to create backend endpoints inside the frontend project (in /pages/api or /app/api). They are serverless functions on Vercel, which means they have cold starts, execution timeouts, and statelessness. For complex APIs, a separate backend (like this project) is preferred.
+
+**Q: What is ISR (Incremental Static Regeneration) in Next.js?**
+A: ISR allows you to update static pages after deployment without rebuilding the whole site. You can set a revalidation time, and Next.js will regenerate the page in the background when a request comes in after the interval.
+
+**Q: How does React's reconciliation algorithm (Virtual DOM diffing) work?**
+A: React uses a Virtual DOM to represent the UI. When state changes, it creates a new Virtual DOM tree and diffs it with the previous one. Only the minimal set of real DOM updates are applied, improving performance. Keys help React identify which elements changed.
+
+**Q: What is hydration in SSR/Next.js?**
+A: Hydration is the process where React attaches event listeners and makes a static HTML page interactive on the client. Mismatches between server and client render can cause hydration errors.
+
+**Q: How do you optimize performance in a Next.js/React app?**
+A: Techniques include code splitting, dynamic imports, memoization (React.memo, useMemo), image optimization, lazy loading, avoiding unnecessary re-renders, and using Server Components for heavy logic.
+
+## Node.js, Express & Backend Advanced
+
+**Q: How do you handle file uploads securely in Node.js/Express?**
+A: Use multer to limit file size, file type, and number of files. Always validate file type (MIME and extension), store files in memory or a temp folder, and upload to a secure cloud provider (like Cloudinary). Never trust user input for file names or paths.
+
+**Q: How do you structure a scalable Express API?**
+A: Use modular routing (separate route files), middleware for auth/validation, controllers for business logic, and services for database or external API calls. Use environment variables for config, and error handling middleware for consistent responses.
+
+**Q: What is middleware in Express and how does it work?**
+A: Middleware are functions that run before the final route handler. They can modify the request/response, end the request, or pass control to the next middleware. Examples: auth checks, logging, parsing JSON, error handling.
+
+**Q: How do you handle rate limiting and brute force protection?**
+A: Use libraries like express-rate-limit to limit requests per IP. Combine with helmet for security headers, and consider using a WAF or reverse proxy for further protection.
+
+**Q: How do you ensure secure password storage?**
+A: Always hash passwords with a strong algorithm (bcrypt, argon2) and a salt. Never store plain text passwords. Use environment variables for secrets.
+
+## MongoDB & Data Modeling Advanced
+
+**Q: How do you design a schema for flexible but consistent data in MongoDB?**
+A: Use Mongoose schemas to enforce structure, required fields, and validation. Use references (ObjectId) for relations, and indexes for performance. For unstructured data, use subdocuments or mixed types, but validate as much as possible.
+
+**Q: How do you handle transactions in MongoDB?**
+A: For multi-document atomic operations, use MongoDB sessions and transactions (supported in replica sets). Mongoose supports transactions via session objects.
+
+## Security & Deployment
+
+**Q: What are common security risks in web apps and how do you mitigate them?**
+A: Risks include XSS, CSRF, SQL/NoSQL injection, insecure CORS, and data leaks. Mitigate with input validation (Zod), escaping output, using helmet, secure cookies, HTTPS, and proper CORS config. Store secrets in environment variables, not code.
+
+**Q: How do you deploy a full-stack app like this?**
+A: Deploy the frontend (Next.js) to Vercel for SSR/SSG and CDN. Deploy the backend (Express) to Render, Heroku, or similar. Use environment variables for config. Set up CORS to allow frontend-backend communication. Use managed MongoDB (Atlas) for the database.
+
+**Q: How do you debug and monitor production issues?**
+A: Use logging (console, winston, or cloud logging), error tracking (Sentry), and health checks. Monitor server and database metrics. Use Vercel/Render dashboards for deployment logs.
+
+## Project-Specific Deep Dives
+
+**Q: How did you handle image optimization issues with external sources?**
+A: Some sources (like randomuser.me) block Vercel's image proxy, causing 400/502 errors. We detect such URLs and use a plain <img> tag instead of Next.js <Image> for those, bypassing optimization.
+
+**Q: How is role-based access enforced in both frontend and backend?**
+A: Backend: Middleware checks JWT and user role before allowing access to protected routes. Frontend: UI hides or disables controls for unauthorized users, but all critical checks are enforced server-side.
+
+**Q: How do you handle large file uploads and what are the limits?**
+A: Multer middleware enforces a file size limit (20MB, can be increased). Cloudinary allows up to 100MB per file. The backend rejects files above the multer limit before uploading to Cloudinary.
+
+**Q: How do you ensure a11y (accessibility) in your UI?**
+A: Use semantic HTML, alt text for images, keyboard navigation, color contrast, and ARIA labels where needed. Tailwind and Next.js help with responsive and accessible design.
+
+**Q: How do you handle environment variables and secrets securely?**
+A: Use .env files locally, and set environment variables in Vercel/Render dashboards for production. Never commit secrets to git. Use dotenv in Node.js to load variables.
+
+---
+
+Good luck with your technical interview! (Advanced)

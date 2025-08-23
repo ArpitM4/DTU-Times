@@ -159,96 +159,89 @@ export default function EditionsPage() {
       </section>
 
       {/* Previous Editions Section */}
-      <section className="py-12 px-6" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-8 text-left" 
-              style={{ color: 'var(--text-primary)' }}>
-            Previous Editions
-          </h2>
-          <div className="flex flex-col lg:flex-row items-center gap-8">
-            <button 
-              className="pagination-arrow w-12 h-12 lg:w-16 lg:h-16 rounded-full border-2 flex items-center justify-center text-2xl lg:text-3xl font-bold transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed order-1 lg:order-none cursor-pointer"
-              style={{ 
-                backgroundColor: 'var(--bg-primary)', 
-                borderColor: 'var(--border-color)', 
-                color: 'var(--text-primary)' 
-              }}
-              onClick={prevPage}
-              disabled={currentPage === 1}
-              aria-label="Previous page"
-            >
-              ‹
-            </button>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 flex-1 order-0 lg:order-none">
-              {loading ? (
-                <div>Loading editions...</div>
-              ) : previousEditions.map((edition) => (
-                  <div key={edition._id} className="previous-edition-card transition-transform duration-300 hover:-translate-y-2 relative">
-                    {user && (user.role === 'editor' || user.role === 'admin') && (
-                      <div className="absolute top-2 right-2 flex gap-2 z-10">
-                        <button
-                          title="Delete"
-                          onClick={async (e) => {
-                            e.preventDefault();
-                            if (window.confirm('Delete this edition?')) {
-                              await apiFetch(`/edition/${edition._id}`, {
-                                method: 'DELETE',
-                                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-                              });
-                              fetchEditions();
-                            }
-                          }}
-                          className="p-2 rounded-full bg-red-200 text-xs">🗑️</button>
-                      </div>
-                    )}
-                    <a href={`/editions/view/${edition.editionNumber}`} className="block">
-                      <div className="edition-placeholder border-2 border-dashed rounded-2xl aspect-[1275/1650] max-h-[650px] w-[85%] mx-auto flex items-center justify-center text-lg font-medium transition-all duration-300 relative overflow-hidden cursor-pointer"
-                           style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-color)', color: 'var(--text-secondary)' }}>
-                        <div className="absolute inset-0 w-full h-full">
-                          {edition.coverPicUrl ? (
-                            <Image
-                              src={edition.coverPicUrl}
-                              alt={`Edition ${edition.editionNumber} Cover`}
-                              width={1275}
-                              height={1650}
-                              className="w-full h-full object-contain rounded-2xl"
-                              style={{ zIndex: 0, objectFit: 'contain', aspectRatio: '1275/1650', background: 'white' }}
-                            />
-                          ) : (
-                            <div className="flex flex-col items-center justify-center h-full w-full z-10 relative">
-                              <div className="text-4xl mb-2">📰</div>
-                              <div>Edition #{edition.editionNumber}</div>
-                              <div className="text-sm mt-2" style={{ color: 'var(--text-secondary)' }}>Click to view</div>
-                            </div>
-                          )}
-                          {edition.coverPicUrl && (
-                            <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-40 text-white text-center py-2 z-20 rounded-b-2xl">
-                              Edition #{edition.editionNumber}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                ))}
-            </div>
+<section className="py-12 px-4 sm:px-6" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+  <div className="max-w-7xl mx-auto">
+    <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 sm:mb-8 text-left"
+        style={{ color: 'var(--text-primary)' }}>
+      Previous Editions
+    </h2>
 
-            <button 
-              className="pagination-arrow w-12 h-12 lg:w-16 lg:h-16 rounded-full border-2 flex items-center justify-center text-2xl lg:text-3xl font-bold transition-all duration-300 hover:scale-105 order-2 lg:order-none cursor-pointer"
-              style={{ 
-                backgroundColor: 'var(--bg-primary)', 
-                borderColor: 'var(--border-color)', 
-                color: 'var(--text-primary)' 
-              }}
-              onClick={nextPage}
-              aria-label="Next page"
-            >
-              ›
-            </button>
-          </div>
+    {/* Cards grid */}
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
+      {loading ? (
+        <div>Loading editions...</div>
+      ) : previousEditions.map((edition) => (
+        <div key={edition._id} className="transition-transform duration-300 hover:-translate-y-1 relative">
+          {user && (user.role === 'editor' || user.role === 'admin') && (
+            <div className="absolute top-2 right-2 flex gap-2 z-10">
+              <button
+                title="Delete"
+                onClick={async (e) => {
+                  e.preventDefault();
+                  if (window.confirm('Delete this edition?')) {
+                    await apiFetch(`/edition/${edition._id}`, {
+                      method: 'DELETE',
+                      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                    });
+                    fetchEditions();
+                  }
+                }}
+                className="p-1.5 sm:p-2 rounded-full bg-red-200 text-xs cursor-pointer">🗑️</button>
+            </div>
+          )}
+          <a href={`/editions/view/${edition.editionNumber}`} className="block">
+            <div className="border rounded-xl overflow-hidden aspect-[3/4] bg-white flex items-center justify-center">
+              {edition.coverPicUrl ? (
+                <Image
+                  src={edition.coverPicUrl}
+                  alt={`Edition ${edition.editionNumber} Cover`}
+                  width={600}
+                  height={800}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="flex flex-col items-center justify-center text-center p-4">
+                  <div className="text-3xl">📰</div>
+                  <div className="mt-2 font-medium">Edition #{edition.editionNumber}</div>
+                  <div className="text-xs opacity-70 mt-1">Click to view</div>
+                </div>
+              )}
+            </div>
+          </a>
         </div>
-      </section>
+      ))}
+    </div>
+
+    {/* Pagination controls */}
+    <div className="flex justify-center items-center gap-4 mt-8">
+      <button
+        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center text-lg sm:text-xl font-bold transition hover:scale-105 disabled:opacity-40 disabled:cursor-not-allowed"
+        style={{
+          backgroundColor: 'var(--bg-primary)',
+          borderColor: 'var(--border-color)',
+          color: 'var(--text-primary)'
+        }}
+        onClick={prevPage}
+        disabled={currentPage === 1}
+      >
+        ‹
+      </button>
+      <span style={{ color: 'var(--text-secondary)' }}>Page {currentPage}</span>
+      <button
+        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center text-lg sm:text-xl font-bold transition hover:scale-105"
+        style={{
+          backgroundColor: 'var(--bg-primary)',
+          borderColor: 'var(--border-color)',
+          color: 'var(--text-primary)'
+        }}
+        onClick={nextPage}
+      >
+        ›
+      </button>
+    </div>
+  </div>
+</section>
+
     </div>
   )
 }

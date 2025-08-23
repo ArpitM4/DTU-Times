@@ -7,9 +7,7 @@ import { apiFetch } from '../utils/api';
 import Link from 'next/link';
 import Image from 'next/image';
 
-/* -----------------------------
-   Home Page
------------------------------- */
+
 export default function Home() {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);

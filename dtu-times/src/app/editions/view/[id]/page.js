@@ -17,6 +17,7 @@ export default function EditionViewPage() {
   const [currentEdition, setCurrentEdition] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [viewMode, setViewMode] = useState("magazine"); // 'magazine' | 'scroll'
+  const [showRotatePopup, setShowRotatePopup] = useState(false); // ✅ define it here
   const [scale, setScale] = useState(1);
 
   const viewerShellRef = useRef(null);
@@ -29,7 +30,13 @@ export default function EditionViewPage() {
           currentEdition.pdfUrl
         )}`
       : currentEdition.pdfUrl);
-
+  // Set default to scroll on phones
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setViewMode("scroll");
+      setShowRotatePopup(true);
+    }
+  }, []);
   useEffect(() => {
     async function fetchEdition() {
       setIsLoading(true);
@@ -107,10 +114,26 @@ export default function EditionViewPage() {
 
   if (!currentEdition || !pdfSrc) {
     return (
+
       <div
         className="min-h-screen pt-20 flex flex-col items-center justify-center"
         style={{ backgroundColor: "var(--bg-primary)" }}
       >
+                    {showRotatePopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg shadow-lg">
+            <p className="text-center text-gray-800 font-semibold">
+              Please rotate your device for a better experience 📱↔️
+            </p>
+            <button
+              onClick={() => setShowRotatePopup(false)}
+              className="mt-3 px-4 py-2 bg-blue-500 text-white rounded-lg"
+            >
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
         <div
           className="text-2xl font-medium mb-6"
           style={{ color: "var(--text-primary)" }}
@@ -130,9 +153,29 @@ export default function EditionViewPage() {
 
   return (
     <div
-      className="min-h-screen pt-20"
+      className="min-h-screen pt-20 relative"
       style={{ backgroundColor: "var(--bg-primary)" }}
     >
+      {/* Rotate Phone Popup */}
+      {showRotatePopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-6">
+          <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-lg text-center">
+            <div className="text-3xl mb-3">📱</div>
+            <h2 className="text-lg font-semibold mb-2">Rotate Your Phone</h2>
+            <p className="text-sm text-gray-600 mb-4">
+              For a better reading experience, please rotate your phone to landscape mode.
+            </p>
+            <button
+              onClick={() => setShowRotatePopup(false)}
+              className="px-4 py-2 rounded-lg bg-accent text-white font-medium shadow hover:scale-105 transition-transform duration-200"
+              style={{ backgroundColor: "var(--accent)" }}
+            >
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Top Bar */}
       <div
         className="py-4 px-6 border-b"
@@ -166,7 +209,6 @@ export default function EditionViewPage() {
         <div className="max-w-7xl mx-auto">
           {/* Viewer Shell */}
           <div
-            ref={viewerShellRef}
             className="rounded-2xl overflow-hidden mb-8 border"
             style={{
               backgroundColor: "var(--bg-secondary)",
@@ -175,7 +217,7 @@ export default function EditionViewPage() {
           >
             {/* Controls */}
             <div
-              className="px-6 py-4 border-b flex items-center justify-between gap-4"
+              className="px-6 py-4 border-b flex items-center justify-between gap-4 flex-wrap"
               style={{
                 borderColor: "var(--border-color)",
                 backgroundColor: "var(--bg-primary)",
@@ -206,7 +248,8 @@ export default function EditionViewPage() {
                       viewMode === "scroll"
                         ? "var(--accent)"
                         : "var(--bg-secondary)",
-                    color: viewMode === "scroll" ? "white" : "var(--text-secondary)",
+                    color:
+                      viewMode === "scroll" ? "white" : "var(--text-secondary)",
                     border: "1px solid var(--border-color)",
                   }}
                 >
@@ -326,3 +369,5 @@ export default function EditionViewPage() {
     </div>
   );
 }
+
+
